@@ -21,7 +21,7 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
         title: const Text(
           'Create Note',
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 25.1,
             fontWeight: FontWeight.w600,
           ),
         ),
