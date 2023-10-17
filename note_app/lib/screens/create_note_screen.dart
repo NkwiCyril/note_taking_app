@@ -12,6 +12,19 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
   void _moveToNoteDisplayScreen() {
     // move pop the current screen from the screen stack
     Navigator.pop(context);
+  } // UPDATE!! let this screen rather take a function as parameter through
+  // which the Navigator will be present.
+
+  final _titleController = TextEditingController();
+  final _contentController = TextEditingController();
+
+  void _dispose() {
+    setState(
+      () {
+        _titleController.dispose();
+        _contentController.dispose();
+      },
+    );
   }
 
   @override
@@ -59,19 +72,22 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
               ),
               TextField(
                 style: const TextStyle(fontSize: 30),
+                controller: _titleController,
                 decoration: InputDecoration(
-                    labelText: 'Title',
-                    labelStyle: TextStyle(
-                      fontSize: 20,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    hintText: 'Note Title'),
+                  labelText: 'Title',
+                  labelStyle: TextStyle(
+                    fontSize: 20,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  hintText: 'Note Title',
+                ),
               ),
               const SizedBox(
                 height: 10,
               ),
               TextField(
                 style: const TextStyle(fontSize: 20),
+                controller: _contentController,
                 decoration: InputDecoration(
                     border: InputBorder.none,
                     labelText: 'Content',
