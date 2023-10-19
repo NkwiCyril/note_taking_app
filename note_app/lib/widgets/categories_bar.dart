@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/widgets/category_icon.dart';
 
 class CategoryBar extends StatefulWidget {
   const CategoryBar({super.key});
@@ -8,10 +9,13 @@ class CategoryBar extends StatefulWidget {
 }
 
 class _CategoryBarState extends State<CategoryBar> {
-  final Color _bgColor = Colors.transparent;
-  final Color _icColor = const Color(0xFF424242);
+  Color bleu = Colors.black;
 
-  void _changeColor() {}
+  void function() {
+    setState(() {
+      bleu = Colors.purple;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,46 +32,10 @@ class _CategoryBarState extends State<CategoryBar> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            IconButton(
-                onPressed: _changeColor,
-                style: IconButton.styleFrom(backgroundColor: _bgColor),
-                icon: Icon(
-                  Icons.lightbulb,
-                  size: 28,
-                  color: _icColor,
-                )),
-            IconButton(
-                onPressed: _changeColor,
-                style: IconButton.styleFrom(backgroundColor: _bgColor),
-                icon: Icon(
-                  Icons.person,
-                  size: 28,
-                  color: _icColor,
-                )),
-            IconButton(
-                onPressed: _changeColor,
-                style: IconButton.styleFrom(backgroundColor: _bgColor),
-                icon: Icon(
-                  Icons.shopping_bag,
-                  size: 28,
-                  color: _icColor,
-                )),
-            IconButton(
-                onPressed: _changeColor,
-                style: IconButton.styleFrom(backgroundColor: _bgColor),
-                icon: Icon(
-                  Icons.book,
-                  size: 28,
-                  color: _icColor,
-                )),
-            IconButton(
-                onPressed: _changeColor,
-                style: IconButton.styleFrom(backgroundColor: _bgColor),
-                icon: Icon(
-                  Icons.work,
-                  size: 28,
-                  color: _icColor,
-                )),
+           CategoryIcon(iconColor: Colors.black12, onPressed: (){}, iconType: Icons.favorite,),
+           CategoryIcon(iconColor: Colors.black12, onPressed: (){}, iconType: Icons.favorite,),
+           CategoryIcon(iconColor: Colors.black12, onPressed: (){}, iconType: Icons.favorite,),
+           CategoryIcon(iconColor: Colors.black12, onPressed: (){}, iconType: Icons.favorite,),
           ],
         ),
       ),

@@ -58,6 +58,7 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
   // function to check input of all fields; whether all fields are filled
   void _checkFields() {
     if (_choosenDate == null || _titleController.text.isEmpty) {
+      // show an alert on the screen if user does not input a title and select a date
       showDialog(
         context: context,
         builder: (ctx) {
@@ -65,6 +66,9 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
         },
       );
     } else {
+     print(_titleController.text);
+     print(_titleController.text);
+     print(dateFormat.format(_choosenDate!));
      
     }
   }
