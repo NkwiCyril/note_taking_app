@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/model/notes_model.dart';
+import 'package:note_app/widgets/alert_dialog.dart';
 import 'package:note_app/widgets/categories_bar.dart';
 
 class CreateNoteScreen extends StatefulWidget {
@@ -33,10 +34,11 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
     );
   }
 
+  // function to display date picker
   void _showDatePicker() async {
     final initialDate = DateTime.now();
     final firstDate =
-        DateTime(initialDate.year, initialDate.month, initialDate.day);
+        DateTime(initialDate.year - 2, initialDate.month, initialDate.day);
     final lastDate = DateTime(2030);
 
     final selectDate = await showDatePicker(
@@ -45,12 +47,26 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
       firstDate: firstDate,
       lastDate: lastDate,
     );
-
     setState(
       () {
+        // get the date selected by the user
         _choosenDate = selectDate;
       },
     );
+  }
+
+  // function to check input of all fields; whether all fields are filled
+  void _checkFields() {
+    if (_choosenDate == null || _titleController.text.isEmpty) {
+      showDialog(
+        context: context,
+        builder: (ctx) {
+          return Alert(ctx: ctx);
+        },
+      );
+    } else {
+     
+    }
   }
 
   @override
@@ -61,12 +77,13 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
           'Create Note',
           style: TextStyle(
             fontSize: 25.1,
-            fontWeight: FontWeight.w600,
           ),
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 8.0,
+            ),
             child: TextButton(
               // button to cancel current session
               onPressed: _moveToNoteDisplayScreen,
@@ -142,8 +159,7 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          print(_titleController.text);
-          print(_contentController.text);
+          _checkFields();
         },
         child: Icon(
           Icons.check,
