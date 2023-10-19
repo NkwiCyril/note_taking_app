@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/model/notes_model.dart';
 import 'package:note_app/widgets/categories_bar.dart';
 
 class CreateNoteScreen extends StatefulWidget {
@@ -18,11 +19,36 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
 
-  void _dispose() {
+  DateTime? _choosenDate;
+
+  @override
+  void dispose() {
     setState(
       () {
         _titleController.dispose();
         _contentController.dispose();
+
+        super.dispose();
+      },
+    );
+  }
+
+  void _showDatePicker() async {
+    final initialDate = DateTime.now();
+    final firstDate =
+        DateTime(initialDate.year, initialDate.month, initialDate.day);
+    final lastDate = DateTime(2030);
+
+    final selectDate = await showDatePicker(
+      context: context,
+      initialDate: initialDate,
+      firstDate: firstDate,
+      lastDate: lastDate,
+    );
+
+    setState(
+      () {
+        _choosenDate = selectDate;
       },
     );
   }
@@ -67,6 +93,20 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
                 height: 10,
               ),
               const CategoryBar(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    _choosenDate == null
+                        ? 'No Date Selected'
+                        : dateFormat.format(_choosenDate!),
+                  ),
+                  IconButton(
+                    onPressed: _showDatePicker,
+                    icon: const Icon(Icons.calendar_month),
+                  )
+                ],
+              ),
               const SizedBox(
                 height: 10,
               ),
@@ -79,7 +119,6 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
                     fontSize: 20,
                     color: Theme.of(context).colorScheme.primary,
                   ),
-                  hintText: 'Note Title',
                 ),
               ),
               const SizedBox(
@@ -92,7 +131,7 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
                     border: InputBorder.none,
                     labelText: 'Content',
                     labelStyle: TextStyle(
-                      fontSize: 40,
+                      fontSize: 20,
                       color: Theme.of(context).colorScheme.primary,
                     ),
                     hintText: 'Note Content'),
@@ -102,7 +141,10 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          print(_titleController.text);
+          print(_contentController.text);
+        },
         child: Icon(
           Icons.check,
           size: 40,
