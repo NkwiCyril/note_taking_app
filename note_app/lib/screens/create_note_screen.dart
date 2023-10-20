@@ -19,7 +19,7 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
 
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
-
+  List<NotesModel> _note = [];
   DateTime? _choosenDate;
 
   @override
@@ -39,7 +39,7 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
     final initialDate = DateTime.now();
     final firstDate =
         DateTime(initialDate.year - 2, initialDate.month, initialDate.day);
-    final lastDate = DateTime(2030);
+    final lastDate = DateTime(initialDate.year + 5);
 
     final selectDate = await showDatePicker(
       context: context,
@@ -56,7 +56,7 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
   }
 
   // function to check input of all fields; whether all fields are filled
-  void _checkFields() {
+  void _checkAndAddNote() {
     if (_choosenDate == null || _titleController.text.isEmpty) {
       // show an alert on the screen if user does not input a title and select a date
       showDialog(
@@ -66,10 +66,9 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
         },
       );
     } else {
-     print(_titleController.text);
-     print(_titleController.text);
-     print(dateFormat.format(_choosenDate!));
-     
+      _note = [
+        NotesModel(title: _titleController.text, content: _contentController.text, category: Category.idea, date: _choosenDate!)
+      ];
     }
   }
 
@@ -106,64 +105,63 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
         margin: const EdgeInsets.symmetric(
           horizontal: 20,
         ),
-        child: SingleChildScrollView(
+        child: Column(
           // scroll view for the notes if they are long
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              const CategoryBar(),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    _choosenDate == null
-                        ? 'No Date Selected'
-                        : dateFormat.format(_choosenDate!),
-                  ),
-                  IconButton(
-                    onPressed: _showDatePicker,
-                    icon: const Icon(Icons.calendar_month),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextField(
-                style: const TextStyle(fontSize: 30),
-                controller: _titleController,
-                decoration: InputDecoration(
-                  labelText: 'Title',
-                  labelStyle: TextStyle(
-                    fontSize: 20,
-                    color: Theme.of(context).colorScheme.primary,
-                  ),
+          children: [
+            const SizedBox(
+              height: 10,
+            ),
+            const CategoryBar(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  _choosenDate == null
+                      ? 'No Date Selected'
+                      : dateFormat.format(_choosenDate!),
+                ),
+                IconButton(
+                  onPressed: _showDatePicker,
+                  icon: const Icon(Icons.calendar_month),
+                ),
+              ],
+            ),
+            SingleChildScrollView(
+              child: Expanded(
+                child: Column(
+                  children: [
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextField(
+                      style: TextStyle(
+                        fontSize: 30,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      controller: _titleController,
+                      decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Title',
+                          hintStyle: TextStyle(fontSize: 30)),
+                    ),
+                    TextField(
+                      style: const TextStyle(fontSize: 20),
+                      controller: _contentController,
+                      decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Type something here.',
+                          hintStyle: TextStyle(fontSize: 20)),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(
-                height: 10,
-              ),
-              TextField(
-                style: const TextStyle(fontSize: 20),
-                controller: _contentController,
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    labelText: 'Content',
-                    labelStyle: TextStyle(
-                      fontSize: 20,
-                      color: Theme.of(context).colorScheme.primary,
-                    ),
-                    hintText: 'Note Content'),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
-      ),
+      ), // const CategoryBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          _checkFields();
+          _checkAndAddNote();
         },
         child: Icon(
           Icons.check,

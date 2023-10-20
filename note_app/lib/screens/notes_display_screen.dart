@@ -19,7 +19,6 @@ class _NotesDisplayScreenState extends State<NotesDisplayScreen> {
       content: 'Lecture on data structures and algorithms in python.',
       category: Category.idea,
       date: DateTime.now(),
-      time: TimeOfDay.now(),
     ),
     NotesModel(
       title: "research on agriculture",
@@ -27,21 +26,18 @@ class _NotesDisplayScreenState extends State<NotesDisplayScreen> {
           'Python is a computer programming language often used to build websites and software, automate tasks, and analyze data. Python is a general-purpose language, not specialized for any specific problems, and used to create various programmes.',
       category: Category.work,
       date: DateTime.now(),
-      time: TimeOfDay.now(),
     ),
     // NotesModel(
     //   title: "cs50x lecture",
     //   content: 'Lecture on data structures and algorithms in python.',
     //   category: Category.study,
     //   date: DateTime.now(),
-    //   time: TimeOfDay.now(),
     // ),
     // NotesModel(
     //   title: "note app idea",
     //   content: 'Lecture on data structures and algorithms in python.',
     //   category: Category.idea,
     //   date: DateTime.now(),
-    //   time: TimeOfDay.now(),
     // ),
     // NotesModel(
     //   title: "research on agriculture",
@@ -49,14 +45,12 @@ class _NotesDisplayScreenState extends State<NotesDisplayScreen> {
     //       'Python is a computer programming language often used to build websites and software, automate tasks, and analyze data. Python is a general-purpose language, not specialized for any specific problems, and used to create various programmes.',
     //   category: Category.work,
     //   date: DateTime.now(),
-    //   time: TimeOfDay.now(),
     // ),
     // NotesModel(
     //   title: "cs50x lecture",
     //   content: 'Lecture on data structures and algorithms in python.',
     //   category: Category.study,
     //   date: DateTime.now(),
-    //   time: TimeOfDay.now(),
     // ),
   ];
 

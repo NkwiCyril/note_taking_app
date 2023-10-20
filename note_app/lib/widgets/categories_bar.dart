@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/widgets/category_icon.dart';
+import 'package:note_app/model/notes_model.dart';
 
 class CategoryBar extends StatefulWidget {
-  const CategoryBar({super.key});
+  const CategoryBar({
+    super.key,
+  });
+
 
   @override
   State<CategoryBar> createState() => _CategoryBarState();
 }
 
 class _CategoryBarState extends State<CategoryBar> {
-  Color bleu = Colors.black;
-
-  void function() {
-    setState(() {
-      bleu = Colors.purple;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -32,10 +28,23 @@ class _CategoryBarState extends State<CategoryBar> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-           CategoryIcon(iconColor: Colors.black12, onPressed: (){}, iconType: Icons.favorite,),
-           CategoryIcon(iconColor: Colors.black12, onPressed: (){}, iconType: Icons.favorite,),
-           CategoryIcon(iconColor: Colors.black12, onPressed: (){}, iconType: Icons.favorite,),
-           CategoryIcon(iconColor: Colors.black12, onPressed: (){}, iconType: Icons.favorite,),
+            CategoryIcon(
+              onPressed: () {},
+              iconType: Icons.lightbulb,
+            ),
+            CategoryIcon(
+              onPressed: () {},
+              iconType: Icons.person,
+            ),
+            CategoryIcon(
+              onPressed: () {},
+              iconType: Icons.shopping_bag,
+            ),
+            CategoryIcon(
+              onPressed: () {},
+              iconType: Icons.book,
+            ),
+            CategoryIcon(onPressed: () {}, iconType: Icons.work,),
           ],
         ),
       ),

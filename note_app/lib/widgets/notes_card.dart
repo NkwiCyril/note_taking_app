@@ -12,7 +12,7 @@ class NoteCard extends StatelessWidget {
       onTap: (){},
       child: Card(
         clipBehavior: Clip.none,
-        elevation: 5,
+        elevation: 3,
         margin: const EdgeInsets.symmetric(horizontal: 18, vertical: 10),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -66,7 +66,7 @@ class NoteCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
-                '${note.formattedDate} at ${note.time.format(context)}',
+                note.formattedDate,
                 style: const TextStyle(
                   fontSize: 15,
                 ),

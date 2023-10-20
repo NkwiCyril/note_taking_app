@@ -22,14 +22,12 @@ class NotesModel {
     required this.content,
     required this.category,
     required this.date,
-    required this.time,
   }) : id = uuid.v4();
 
   final String id;
   final String title;
   final String content;
   final DateTime date;
-  final TimeOfDay time;
   final Category category;
 
   String get formattedDate {

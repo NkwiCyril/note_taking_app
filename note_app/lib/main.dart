@@ -5,7 +5,7 @@ import 'package:note_app/screens/notes_display_screen.dart';
 final appTheme = ThemeData(
   useMaterial3: true,
   colorScheme: ColorScheme.fromSeed(
-    seedColor: const Color.fromRGBO(80, 51, 109, 0),
+    seedColor: const Color.fromARGB(0, 80, 51, 109),
   ),
   textTheme: GoogleFonts.figtreeTextTheme()
   // cardTheme: const CardTheme().copyWith(
