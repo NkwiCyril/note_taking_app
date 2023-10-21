@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_app/model/notes_model.dart';
 import 'package:note_app/widgets/category_icon.dart';
 
 class CategoryBar extends StatefulWidget {
@@ -7,16 +8,16 @@ class CategoryBar extends StatefulWidget {
     required this.onSelectCategory,
   });
 
-  final void Function(IconData selectedIcon) onSelectCategory;
+  final void Function(Category selectedCategory) onSelectCategory;
 
   @override
   State<CategoryBar> createState() => _CategoryBarState();
 }
 
 class _CategoryBarState extends State<CategoryBar> {
-  void _selectIcon(IconData icon) {
+  void _selectIcon(Category categoryIcon) {
     setState(() {
-      widget.onSelectCategory(icon);
+      widget.onSelectCategory(categoryIcon);
     });
   }
 
@@ -37,31 +38,31 @@ class _CategoryBarState extends State<CategoryBar> {
           children: [
             CategoryIcon(
               onPressed: () {
-                _selectIcon(Icons.lightbulb);
+                _selectIcon(Category.idea);
               },
               iconType: Icons.lightbulb,
             ),
             CategoryIcon(
               onPressed: () {
-                _selectIcon(Icons.person);
+                _selectIcon(Category.personal);
               },
               iconType: Icons.person,
             ),
             CategoryIcon(
               onPressed: () {
-                _selectIcon(Icons.shopping_bag);
+                _selectIcon(Category.shopping);
               },
               iconType: Icons.shopping_bag,
             ),
             CategoryIcon(
               onPressed: () {
-                _selectIcon(Icons.book);
+                _selectIcon(Category.study);
               },
               iconType: Icons.book,
             ),
             CategoryIcon(
               onPressed: () {
-                _selectIcon(Icons.work);
+                _selectIcon(Category.work);
               },
               iconType: Icons.work,
             ),

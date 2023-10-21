@@ -4,7 +4,9 @@ import 'package:note_app/widgets/alert_dialog.dart';
 import 'package:note_app/widgets/categories_bar.dart';
 
 class CreateNoteScreen extends StatefulWidget {
-  const CreateNoteScreen({super.key});
+  const CreateNoteScreen({super.key, required this.registeredNote});
+
+  final void Function(NotesModel note) registeredNote;
 
   @override
   State<CreateNoteScreen> createState() => _CreateNoteScreenState();
@@ -19,8 +21,9 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
 
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
-  List<NotesModel> _note = [];
+  List<NotesModel> note = [];
   DateTime? _choosenDate;
+  Category categoryIcon = Category.idea;
 
   @override
   void dispose() {
@@ -66,9 +69,14 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
         },
       );
     } else {
-      _note = [
-        NotesModel(title: _titleController.text, content: _contentController.text, category: Category.idea, date: _choosenDate!)
-      ];
+      widget.registeredNote(
+        NotesModel(
+          title: _titleController.text,
+          content: _contentController.text,
+          category: categoryIcon,
+          date: _choosenDate!,
+        )
+      );
     }
   }
 
@@ -111,7 +119,11 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
             const SizedBox(
               height: 10,
             ),
-            const CategoryBar(),
+            CategoryBar(
+              onSelectCategory: (selectedIcon) {
+                categoryIcon = selectedIcon;
+              },
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
