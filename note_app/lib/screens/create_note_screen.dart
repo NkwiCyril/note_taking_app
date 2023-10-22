@@ -21,9 +21,8 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
 
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
-  List<NotesModel> note = [];
   DateTime? _choosenDate;
-  Category categoryIcon = Category.idea;
+  var categoryIcon = Category.idea;
 
   @override
   void dispose() {
@@ -37,12 +36,25 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
     );
   }
 
+  void _iconSelected(Category selectedIcon) {
+
+    setState(() {
+      categoryIcon = selectedIcon;
+    });
+
+  }
+
   // function to display date picker
   void _showDatePicker() async {
     final initialDate = DateTime.now();
-    final firstDate =
-        DateTime(initialDate.year - 2, initialDate.month, initialDate.day);
-    final lastDate = DateTime(initialDate.year + 5);
+    final firstDate = DateTime(
+      initialDate.year - 2,
+      initialDate.month,
+      initialDate.day,
+    );
+    final lastDate = DateTime(
+      initialDate.year + 5,
+    );
 
     final selectDate = await showDatePicker(
       context: context,
@@ -75,7 +87,7 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
           content: _contentController.text,
           category: categoryIcon,
           date: _choosenDate!,
-        )
+        ),
       );
     }
   }
@@ -120,9 +132,7 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
               height: 10,
             ),
             CategoryBar(
-              onSelectCategory: (selectedIcon) {
-                categoryIcon = selectedIcon;
-              },
+              onSelectCategory: _iconSelected,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,

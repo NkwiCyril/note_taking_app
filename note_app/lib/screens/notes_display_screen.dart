@@ -13,52 +13,22 @@ class NotesDisplayScreen extends StatefulWidget {
 }
 
 class _NotesDisplayScreenState extends State<NotesDisplayScreen> {
-  final List<NotesModel> _registeredNotes = [
-    NotesModel(
-      title: "note app idea",
-      content: 'Lecture on data structures and algorithms in python.',
-      category: Category.idea,
-      date: DateTime.now(),
-    ),
-    NotesModel(
-      title: "research on agriculture",
-      content:
-          'Python is a computer programming language often used to build websites and software, automate tasks, and analyze data. Python is a general-purpose language, not specialized for any specific problems, and used to create various programmes.',
-      category: Category.work,
-      date: DateTime.now(),
-    ),
-    // NotesModel(
-    //   title: "cs50x lecture",
-    //   content: 'Lecture on data structures and algorithms in python.',
-    //   category: Category.study,
-    //   date: DateTime.now(),
-    // ),
-    // NotesModel(
-    //   title: "note app idea",
-    //   content: 'Lecture on data structures and algorithms in python.',
-    //   category: Category.idea,
-    //   date: DateTime.now(),
-    // ),
-    // NotesModel(
-    //   title: "research on agriculture",
-    //   content:
-    //       'Python is a computer programming language often used to build websites and software, automate tasks, and analyze data. Python is a general-purpose language, not specialized for any specific problems, and used to create various programmes.',
-    //   category: Category.work,
-    //   date: DateTime.now(),
-    // ),
-    // NotesModel(
-    //   title: "cs50x lecture",
-    //   content: 'Lecture on data structures and algorithms in python.',
-    //   category: Category.study,
-    //   date: DateTime.now(),
-    // ),
-  ];
+  final List<NotesModel> _registeredNotes = [];
 
-  void _addNote(BuildContext context) {
+  void _addNote(NotesModel note) {
+    setState(() {
+      _registeredNotes.add(note);
+    });
+
+  }
+
+  void _gotoAddNote(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) {
-          return const CreateNoteScreen();
+          return CreateNoteScreen(
+            registeredNote: _addNote
+          );
         },
       ),
     );
@@ -92,7 +62,7 @@ class _NotesDisplayScreenState extends State<NotesDisplayScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              _addNote(context);
+              _gotoAddNote(context);
             },
             icon: const Icon(
               Icons.add,
