@@ -164,13 +164,18 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
                           hintText: 'Title',
                           hintStyle: TextStyle(fontSize: 30)),
                     ),
-                    TextField(
-                      style: const TextStyle(fontSize: 20),
-                      controller: _contentController,
-                      decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: 'Type something here.',
-                        hintStyle: TextStyle(fontSize: 20),
+                    ConstrainedBox(
+                      constraints: const BoxConstraints(
+                        
+                      ),
+                      child: TextField(
+                        style: const TextStyle(fontSize: 20),
+                        controller: _contentController,
+                        decoration: const InputDecoration(
+                          border: InputBorder.none,
+                          hintText: 'Type something here.',
+                          hintStyle: TextStyle(fontSize: 20),
+                        ),
                       ),
                     ),
                   ],

@@ -19,16 +19,19 @@ class _NotesDisplayScreenState extends State<NotesDisplayScreen> {
     setState(() {
       _registeredNotes.add(note);
     });
+  }
 
+  void _removeNote(NotesModel note) {
+    setState(() {
+      _registeredNotes.remove(note);
+    });
   }
 
   void _gotoAddNote(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) {
-          return CreateNoteScreen(
-            registeredNote: _addNote
-          );
+          return CreateNoteScreen(registeredNote: _addNote);
         },
       ),
     );
@@ -48,7 +51,10 @@ class _NotesDisplayScreenState extends State<NotesDisplayScreen> {
 
     final Widget screenContent = _registeredNotes.isEmpty
         ? noList
-        : NotesList(onRegistered: _registeredNotes);
+        : NotesList(
+            onRegistered: _registeredNotes,
+            onDismiss: _removeNote,
+          );
 
     return Scaffold(
       appBar: AppBar(

@@ -14,6 +14,7 @@ class CategoryBar extends StatefulWidget {
 }
 
 class _CategoryBarState extends State<CategoryBar> {
+
   void _selectCategory(Category categoryIcon) {
     setState(
       () {
