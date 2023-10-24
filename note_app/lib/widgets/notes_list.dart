@@ -21,7 +21,7 @@ class NotesList extends StatelessWidget {
           background: Container(
             padding: const EdgeInsets.symmetric(vertical: 15),
             decoration:
-                BoxDecoration(color: Theme.of(context).colorScheme.onError),
+                BoxDecoration(color: Theme.of(context).colorScheme.error),
             child: const Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
