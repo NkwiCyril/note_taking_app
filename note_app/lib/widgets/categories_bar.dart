@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:note_app/model/notes_model.dart';
-import 'package:note_app/widgets/category_icon.dart';
 
 class CategoryBar extends StatefulWidget {
   const CategoryBar({
@@ -15,10 +14,12 @@ class CategoryBar extends StatefulWidget {
 }
 
 class _CategoryBarState extends State<CategoryBar> {
-  void _selectIcon(Category categoryIcon) {
-    setState(() {
-      widget.onSelectCategory(categoryIcon);
-    });
+  void _selectCategory(Category categoryIcon) {
+    setState(
+      () {
+        widget.onSelectCategory(categoryIcon);
+      },
+    );
   }
 
   @override
@@ -36,35 +37,55 @@ class _CategoryBarState extends State<CategoryBar> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            CategoryIcon(
+            IconButton(
               onPressed: () {
-                _selectIcon(Category.idea);
+                _selectCategory(Category.idea);
               },
-              iconType: Icons.lightbulb,
+              icon: Icon(
+                categoryIcons[Category.idea],
+                size: 28,
+                color: Colors.black,
+              ),
             ),
-            CategoryIcon(
+            IconButton(
               onPressed: () {
-                _selectIcon(Category.personal);
+                _selectCategory(Category.study);
               },
-              iconType: Icons.person,
+              icon: Icon(
+                categoryIcons[Category.study],
+                size: 28,
+                color: Colors.black,
+              ),
             ),
-            CategoryIcon(
+            IconButton(
               onPressed: () {
-                _selectIcon(Category.shopping);
+                _selectCategory(Category.shopping);
               },
-              iconType: Icons.shopping_bag,
+              icon: Icon(
+                categoryIcons[Category.shopping],
+                size: 28,
+                color: Colors.black,
+              ),
             ),
-            CategoryIcon(
+            IconButton(
               onPressed: () {
-                _selectIcon(Category.study);
+                _selectCategory(Category.work);
               },
-              iconType: Icons.book,
+              icon: Icon(
+                categoryIcons[Category.work],
+                size: 28,
+                color: Colors.black,
+              ),
             ),
-            CategoryIcon(
+            IconButton(
               onPressed: () {
-                _selectIcon(Category.work);
+                _selectCategory(Category.personal);
               },
-              iconType: Icons.work,
+              icon: Icon(
+                categoryIcons[Category.personal],
+                size: 28,
+                color: Colors.black,
+              ),
             ),
           ],
         ),

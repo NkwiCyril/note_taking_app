@@ -22,7 +22,7 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
   final _titleController = TextEditingController();
   final _contentController = TextEditingController();
   DateTime? _choosenDate;
-  var categoryIcon = Category.idea;
+  Category categoryIcon = Category.idea;
 
   @override
   void dispose() {
@@ -34,14 +34,6 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
         super.dispose();
       },
     );
-  }
-
-  void _iconSelected(Category selectedIcon) {
-
-    setState(() {
-      categoryIcon = selectedIcon;
-    });
-
   }
 
   // function to display date picker
@@ -68,6 +60,12 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
         _choosenDate = selectDate;
       },
     );
+  }
+
+  void _choosenIcon(Category iconChoosen) {
+    setState(() {
+      categoryIcon = iconChoosen;
+    });
   }
 
   // function to check input of all fields; whether all fields are filled
@@ -132,7 +130,7 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
               height: 10,
             ),
             CategoryBar(
-              onSelectCategory: _iconSelected,
+              onSelectCategory: _choosenIcon,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -170,9 +168,10 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
                       style: const TextStyle(fontSize: 20),
                       controller: _contentController,
                       decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: 'Type something here.',
-                          hintStyle: TextStyle(fontSize: 20)),
+                        border: InputBorder.none,
+                        hintText: 'Type something here.',
+                        hintStyle: TextStyle(fontSize: 20),
+                      ),
                     ),
                   ],
                 ),
@@ -180,7 +179,7 @@ class _CreateNoteScreenState extends State<CreateNoteScreen> {
             ),
           ],
         ),
-      ), // const CategoryBar(),
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           _checkAndAddNote();
